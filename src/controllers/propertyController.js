@@ -7,7 +7,6 @@ export const addProperty = async (req, res) => {
                 message: "Image required"
             })
         }
-        // const imageUrl = `http://localhost:3000/upload/${req.file.filename}`
         const imageUrl = req.file.filename;
         const data = await propertySchema.create({
             ...req.body, image: imageUrl, userId: req.userId
@@ -129,9 +128,9 @@ export const updateProperty = async (req, res) => {
         if (location) data.location = location
         if (purpose) data.purpose = purpose
         if (req.file) {
-            data.image = `http://localhost:3000/upload/${req.file.filename}`
+            data.image = req.file.filename
         }
-        data.updatedAt = Date.now
+        data.updatedAt = Date.now()
         await data.save()
         return res.status(200).json({
             success: true,
