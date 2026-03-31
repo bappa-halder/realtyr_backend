@@ -7,7 +7,8 @@ export const addProperty = async (req, res) => {
                 message: "Image required"
             })
         }
-        const imageUrl = `http://localhost:3000/upload/${req.file.filename}`
+        // const imageUrl = `http://localhost:3000/upload/${req.file.filename}`
+        const imageUrl = req.file.filename;
         const data = await propertySchema.create({
             ...req.body, image: imageUrl, userId: req.userId
         })
