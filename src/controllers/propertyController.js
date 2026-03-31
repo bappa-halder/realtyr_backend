@@ -4,10 +4,18 @@ export const addProperty = async (req, res) => {
     try {
         if (!req.file) {
             return res.status(400).json({
-                message: "Image required"
-            })
+                success: false,
+                message: "Image is required or upload failed"
+            });
         }
-        const imageUrl = req.file.filename;
+        const imageUrl = req.file?.filename;
+
+        if (!imageUrl) {
+            return res.status(400).json({
+                success: false,
+                message: "Image upload failed"
+            });
+        }
         const data = await propertySchema.create({
             ...req.body, image: imageUrl, userId: req.userId
         })
@@ -127,8 +135,8 @@ export const updateProperty = async (req, res) => {
         if (area) data.area = area
         if (location) data.location = location
         if (purpose) data.purpose = purpose
-        if (req.file) {
-            data.image = req.file.filename || data.image
+        if (req.file?.filename) {
+            data.image = req.file.filename;
         }
         data.updatedAt = Date.now()
         await data.save()
