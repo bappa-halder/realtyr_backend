@@ -128,7 +128,7 @@ export const updateProperty = async (req, res) => {
         if (location) data.location = location
         if (purpose) data.purpose = purpose
         if (req.file) {
-            data.image = req.file.filename
+            data.image = req.file.filename || data.image
         }
         data.updatedAt = Date.now()
         await data.save()
