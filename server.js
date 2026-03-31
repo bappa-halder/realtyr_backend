@@ -20,6 +20,9 @@ app.use("/property", propertyRoute)
 app.use("/wishList", wishListRoute)
 app.use("/contact", contactRoute)
 
+app.get("/", (req, res) => {
+    res.send("API is running...");
+})
 app.listen(port, () => {
     console.log(`Server running at ${port}`);
 })
