@@ -8,7 +8,7 @@ export const addProperty = async (req, res) => {
                 message: "Image is required or upload failed"
             });
         }
-        const imageUrl = req.file?.filename;
+        const imageUrl = req.file?.path;
 
         if (!imageUrl) {
             return res.status(400).json({
@@ -135,8 +135,8 @@ export const updateProperty = async (req, res) => {
         if (area) data.area = area
         if (location) data.location = location
         if (purpose) data.purpose = purpose
-        if (req.file?.filename) {
-            data.image = req.file.filename;
+        if (req.file && req.file.path) {
+            data.image = req.file.path;
         }
         data.updatedAt = Date.now()
         await data.save()
