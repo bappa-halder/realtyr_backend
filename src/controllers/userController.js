@@ -34,7 +34,9 @@ export const registerUser = async (req, res) => {
                     message: "Invalid image type"
                 })
             }
-            avatarUrl = `http://localhost:3000/upload/${req.file.filename}`
+            if (req.file && req.file.path) {
+                avatarUrl = req.file.path;
+            }
         }
 
         const user = await userSchema.create({
@@ -163,7 +165,9 @@ export const updateUser = async (req, res) => {
                 })
             }
 
-            user.avatar = `http://localhost:3000/upload/${req.file.filename}`
+            if (req.file && req.file.path) {
+                user.avatar = req.file.path;
+            }
         }
         user.updatedAt = Date.now()
         await user.save()
