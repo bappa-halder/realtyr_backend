@@ -5,8 +5,8 @@ export const propertyValidateSchema = yup.object({
   title: yup
     .string()
     .trim()
-    .min(3, "Title must be at least 5 characters")
-    .max(10, "Title must be at most 20 characters")
+    .min(3, "Title must be at least 3 characters")
+    .max(10, "Title must be at most 10 characters")
     .required("Title is required"),
 
   price: yup
