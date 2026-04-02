@@ -8,23 +8,16 @@ export const validateProperty = (schema) => async (req, res, next) => {
       area: req.body.area ? Number(req.body.area) : undefined,
     };
 
-    Object.keys(parsedBody).forEach((key) => {
-      if (parsedBody[key] === "") {
-        delete parsedBody[key];
-      }
-    });
-
     await schema.validate(parsedBody, {
       abortEarly: false,
     });
 
-    req.body = parsedBody;
-
+    req.body = parsedBody; 
     next();
   } catch (err) {
     return res.status(400).json({
       success: false,
-      message: err.inner?.map(e => e.message) || [err.message],
+      errors: err.errors,
     });
   }
 };
