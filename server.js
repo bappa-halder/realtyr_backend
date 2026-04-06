@@ -13,7 +13,15 @@ const port = process.env.PORT || 3000
 dbConnect()
 
 app.use(express.json())
-app.use(cors())
+// app.use(cors())
+app.use(
+    cors({
+        origin: "https://realtyr-realestate.vercel.app",
+        credentials: true,
+    })
+);
+
+app.options("*", cors());
 app.use("/upload", express.static("uploads"))
 app.use("/user", userRoute)
 app.use("/property", propertyRoute)
