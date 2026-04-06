@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
             userName, phone, email, password: hashedPassword, role, avatar: avatarUrl
         })
 
-        const token = jwt.sign({ id: user._id }, process.env.secretkey, { expiresIn: "5m" })
+        const token = jwt.sign({ id: user._id }, process.env.SECRETKEY, { expiresIn: "5m" })
         verificationEmail(token, email)
         user.token = token
         await user.save()
@@ -84,12 +84,12 @@ export const loginUser = async (req, res) => {
             else if (passwordCheck && user.verified === true) {
                 const accessToken = jwt.sign(
                     { id: user.id },
-                    process.env.secretkey,
+                    process.env.SECRETKEY,
                     { expiresIn: "10days" }
                 )
                 const refreshToken = jwt.sign(
                     { id: user.id },
-                    process.env.secretkey,
+                    process.env.SECRETKEY,
                     { expiresIn: "30days" }
                 )
 

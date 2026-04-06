@@ -6,12 +6,12 @@ export const loginEmail = async (email, userName, role) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: process.env.email,
-                pass: process.env.password
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             }
         })
         const mailConfig = {
-            from: `"RealTyr Support Team" <${process.env.email}>`,
+            from: `"RealTyr Support Team" <${process.env.EMAIL}>`,
             to: email,
             subject: "New Login to Your Account",
             html: `

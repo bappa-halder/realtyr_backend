@@ -6,13 +6,13 @@ export const verificationEmail = async (token, email) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.email,
-        pass: process.env.password,
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
       },
     });
 
     const mailConfig = {
-      from: `"RealTyr" <${process.env.email}>`,
+      from: `"RealTyr" <${process.env.EMAIL}>`,
       to: email,
       subject: "Email Verification",
       html: `

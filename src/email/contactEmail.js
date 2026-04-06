@@ -6,13 +6,13 @@ export const sendEmail = async (firstName, lastName, email, phone, message) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
-                user: process.env.email,
-                pass: process.env.password
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
             }
         })
         const mailConfig = {
             from: email,
-            to: process.env.email,
+            to: process.env.EMAIL,
             subject: "Realtyr new query",
             html: `
             <h3>New Message from Contact Form</h3>
