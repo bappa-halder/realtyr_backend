@@ -21,7 +21,6 @@ app.use(
     })
 );
 
-app.options("*", cors());
 app.use("/upload", express.static("uploads"))
 app.use("/user", userRoute)
 app.use("/property", propertyRoute)
