@@ -94,9 +94,9 @@ export const loginUser = async (req, res) => {
                 )
 
 
-                await loginEmail(user.email, user.userName, user.role)
                 user.isLoggedIn = true
                 await user.save()
+                await loginEmail(user.email, user.userName, user.role)
                 return res.status(200).json({
                     success: true,
                     message: "User login successfully",
