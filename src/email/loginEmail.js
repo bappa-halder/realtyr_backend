@@ -7,7 +7,7 @@ export const loginEmail = async (email, userName, role) => {
         const transporter = nodemailer.createTransport({
             service: "gmail",
             host: "smtp.gmail.com",
-            port: 587,
+            port: 465,
             secure: true, // Use SSL
             auth: {
                 user: process.env.EMAIL, // Set in Render Dashboard
