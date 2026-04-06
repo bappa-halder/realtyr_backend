@@ -3,13 +3,7 @@ import dotenv from "dotenv/config"
 
 export const loginEmail = async (email, userName, role) => {
     try {
-        // const transporter = nodemailer.createTransport({
-        //     service: "gmail",
-        //     auth: {
-        //         user: process.env.email,
-        //         pass: process.env.password
-        //     }
-        // })
+        
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
             port: 587,

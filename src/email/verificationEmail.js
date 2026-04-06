@@ -3,14 +3,24 @@ import dotenv from "dotenv/config";
 
 export const verificationEmail = async (token, email) => {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.email,
-        pass: process.env.password,
-      },
-    });
+    // const transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.email,
+    //     pass: process.env.password,
+    //   },
+    // });
 
+    const transporter = nodemailer.createTransport({
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false,
+                auth: {
+                    user: process.env.email,
+                    pass: process.env.password,
+                },
+                family: 4
+            });
     const mailConfig = {
       from: `"RealTyr" <${process.env.email}>`,
       to: email,
