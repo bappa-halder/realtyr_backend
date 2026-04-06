@@ -12,7 +12,7 @@ export const emailVerify = async (req, res) => {
         }
         else {
             const token = authHeader.split(" ")[1]
-            jwt.verify(token, process.env.SECRETKEY, async (err, decoded) => {
+            jwt.verify(token, process.env.secretkey, async (err, decoded) => {
                 if (err) {
                     if (err.name === "TokenExpiredError") {
                         return res.status(400).json({
