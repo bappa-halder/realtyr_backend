@@ -3,13 +3,23 @@ import dotenv from "dotenv/config"
 
 export const loginEmail = async (email, userName, role) => {
     try {
+        // const transporter = nodemailer.createTransport({
+        //     service: "gmail",
+        //     auth: {
+        //         user: process.env.EMAIL,
+        //         pass: process.env.PASSWORD
+        //     }
+        // })
         const transporter = nodemailer.createTransport({
             service: "gmail",
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true, // Use SSL
             auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD
-            }
-        })
+                user: process.env.EMAIL, // Set in Render Dashboard
+                pass: process.env.PASSWORD, // Use an App Password
+            },
+        });
         const mailConfig = {
             from: `"RealTyr Support Team" <${process.env.EMAIL}>`,
             to: email,
