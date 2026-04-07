@@ -57,7 +57,7 @@ export const verificationEmail = async (token, email) => {
   try {
     const response = await resend.emails.send({
       from: "RealTyr <onboarding@resend.dev>", // change after domain verify
-      to: email,
+      to: "your-own-gmail@gmail.com",
       subject: "Email Verification",
       html: `
   <div style="margin:0;padding:0;background-color:#f4f6f8;font-family:Arial,sans-serif;">
