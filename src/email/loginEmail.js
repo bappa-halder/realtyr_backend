@@ -4,16 +4,7 @@ import dotenv from "dotenv/config"
 export const loginEmail = async (email, userName, role) => {
     try {
 
-        // const transporter = nodemailer.createTransport({
-        //     service: "gmail",
-        //     host: "smtp.gmail.com",
-        //     port: 587,
-        //     secure: true, // Use SSL
-        //     auth: {
-        //         user: process.env.EMAIL, // Set in Render Dashboard
-        //         pass: process.env.PASSWORD, // Use an App Password
-        //     },
-        // });
+       
         dns.setDefaultResultOrder("ipv4first"); // ⭐ important
         const transporter = nodemailer.createTransport({
             host: "smtp.gmail.com",
