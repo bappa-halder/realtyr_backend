@@ -56,7 +56,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const verificationEmail = async (token, email) => {
   try {
     const response = await resend.emails.send({
-      from: "RealTyr <onboarding@resend.dev>", // change after domain verify
+      from: process.env.EMAIL, // change after domain verify
       to: email,
       subject: "Email Verification",
       html: `
