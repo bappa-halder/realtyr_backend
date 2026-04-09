@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import userSchema from "../models/userSchema.js"
 import { verificationEmail } from "../email/verificationEmail.js"
-import { loginEmail } from "../email/loginEmail.js"
+// import { loginEmail } from "../email/loginEmail.js"
 
 // Register //
 
