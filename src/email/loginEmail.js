@@ -3,18 +3,13 @@ import dotenv from "dotenv/config"
 
 export const loginEmail = async (email, userName, role) => {
     try {
-
-       
-        dns.setDefaultResultOrder("ipv4first"); // ⭐ important
         const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            secure: false, // TLS
+            service: "gmail",
             auth: {
                 user: process.env.EMAIL,
-                pass: process.env.PASSWORD,
-            },
-        });
+                pass: process.env.PASSWORD
+            }
+        })
         const mailConfig = {
             from: `"RealTyr Support Team" <${process.env.EMAIL}>`,
             to: email,
@@ -37,9 +32,9 @@ export const loginEmail = async (email, userName, role) => {
       `,
         }
         const info = await transporter.sendMail(mailConfig)
-        console.log("✅ Email sent:", info.response)
+        console.log("Email sent:", info.response)
     } catch (error) {
-        console.error("❌ Error sending email:", error.message)
+        console.error("Error sending email:", error.message)
         throw error
     }
 
