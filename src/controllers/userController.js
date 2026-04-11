@@ -3,7 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import userSchema from "../models/userSchema.js"
 import { verificationEmail } from "../email/verificationEmail.js"
-// import { loginEmail } from "../email/loginEmail.js"
+import { loginEmail } from "../email/loginEmail.js"
 
 // Register //
 
@@ -73,6 +73,11 @@ export const loginUser = async (req, res) => {
                 message: "Unathorized access"
             })
         }
+        if (user.verified === false) {
+            return res.status(400).json({
+                message: "Complete email verification then login"
+            })
+        }
         else {
             const passwordCheck = await bcrypt.compare(password, user.password)
             if (!passwordCheck) {
@@ -96,7 +101,7 @@ export const loginUser = async (req, res) => {
 
                 user.isLoggedIn = true
                 await user.save()
-                // loginEmail(user.email, user.userName, user.role)
+                loginEmail(user.email, user.userName, user.role);
                 return res.status(200).json({
                     success: true,
                     message: "User login successfully",
