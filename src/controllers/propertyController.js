@@ -92,6 +92,41 @@ export const getOneProperty = async (req, res) => {
     }
 }
 
+export const getOnlyIdProperty = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 6;
+
+        const skip = (page - 1) * limit;
+
+        const total = await propertySchema.countDocuments({
+            userId: req.userId
+        });
+
+        const property = await propertySchema.find({
+            userId: req.userId
+        })
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
+
+        return res.status(200).json({
+            success: true,
+            message: "Property fetched successfully",
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+            totalItems: total,
+            data: property
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 export const deleteProperty = async (req, res) => {
     try {
         const { id } = req.params
