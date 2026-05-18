@@ -43,10 +43,15 @@ export const registerUser = async (req, res) => {
             userName, phone, email, password: hashedPassword, role, avatar: avatarUrl
         })
 
-        const token = jwt.sign({ id: user._id }, process.env.secretkey, { expiresIn: "5m" })
-        await verificationEmail(token, email)
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "5m" })
         user.token = token
         await user.save()
+        try {
+            await verificationEmail(token, email)
+            console.log("Verification mail sent")
+        } catch (mailError) {
+            console.log("Mail Error:", mailError.message)
+        }
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
@@ -89,12 +94,12 @@ export const loginUser = async (req, res) => {
             else if (passwordCheck && user.verified === true) {
                 const accessToken = jwt.sign(
                     { id: user.id },
-                    process.env.secretkey,
+                    process.env.SECRET_KEY,
                     { expiresIn: "10days" }
                 )
                 const refreshToken = jwt.sign(
                     { id: user.id },
-                    process.env.secretkey,
+                    process.env.SECRET_KEY,
                     { expiresIn: "30days" }
                 )
 
